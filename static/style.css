@@ -1,0 +1,523 @@
+/* ==========================================================================
+   Kisan Dost — design tokens
+   Grounded in Pakistani agriculture: soil, wheat, field, and a hand-painted
+   truck-art pinstripe as the one bold, deliberate accent.
+   ========================================================================== */
+
+:root {
+  --soil: #2b1d12;
+  --soil-2: #3c2a1a;
+  --soil-line: #4d3722;
+
+  --wheat: #d4a017;
+  --wheat-deep: #a97c0f;
+  --wheat-pale: #f4dfa0;
+
+  --field: #3f6b3f;
+  --field-pale: #dfe9de;
+
+  --clay: #b5482f;
+
+  --haze: #eef2ea;
+  --paper: #ffffff;
+
+  --ink: #211a12;
+  --ink-soft: #6b5d4c;
+  --ink-on-soil: #f1e7d6;
+  --ink-on-soil-soft: #b9a68a;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --font-brand: "Zilla Slab", "Georgia", serif;
+  --font-body: "Mukta", "Noto Nastaliq Urdu", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--haze);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   The one bold element: a painted pinstripe, referencing Pakistani truck art
+   -------------------------------------------------------------------------- */
+
+.pinstripe {
+  height: 6px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--wheat) 0%, var(--wheat) 20%,
+    var(--field) 20%, var(--field) 40%,
+    var(--clay) 40%, var(--clay) 55%,
+    var(--soil-2) 55%, var(--soil-2) 70%,
+    var(--wheat) 70%, var(--wheat) 85%,
+    var(--field) 85%, var(--field) 100%
+  );
+}
+
+/* --------------------------------------------------------------------------
+   App shell
+   -------------------------------------------------------------------------- */
+
+.app {
+  display: flex;
+  height: calc(100vh - 6px);
+  min-height: 560px;
+}
+
+.drawer-toggle {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   Sidebar
+   -------------------------------------------------------------------------- */
+
+.sidebar {
+  width: 300px;
+  flex-shrink: 0;
+  background: var(--soil);
+  color: var(--ink-on-soil);
+  padding: 24px 22px 20px;
+  overflow-y: auto;
+  border-right: 1px solid var(--soil-line);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--soil-line);
+  margin-bottom: 22px;
+}
+
+.brand-mark {
+  flex-shrink: 0;
+}
+
+.brand h1 {
+  font-family: var(--font-brand);
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin: 0;
+  color: #fff;
+  letter-spacing: 0.2px;
+}
+
+.tagline {
+  margin: 2px 0 0;
+  font-size: 0.82rem;
+  color: var(--ink-on-soil-soft);
+}
+
+.sidebar h2 {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--wheat-pale);
+  margin: 0 0 12px;
+}
+
+.farm-panel {
+  margin-bottom: 26px;
+}
+
+.farm-list {
+  margin: 0;
+  border-top: 1px solid var(--soil-line);
+}
+
+.farm-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 2px;
+  border-bottom: 1px solid var(--soil-line);
+  font-size: 0.92rem;
+}
+
+.farm-row dt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink-on-soil-soft);
+  font-weight: 500;
+}
+
+.farm-row dt svg {
+  color: var(--wheat);
+  flex-shrink: 0;
+}
+
+.farm-row dd {
+  margin: 0;
+  color: var(--ink-on-soil);
+  font-weight: 600;
+  text-align: right;
+}
+
+.farm-row dd.filled {
+  color: var(--wheat-pale);
+}
+
+.farm-hint {
+  font-size: 0.78rem;
+  color: var(--ink-on-soil-soft);
+  margin: 10px 2px 0;
+  line-height: 1.4;
+}
+
+.chip-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chip {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  text-align: left;
+  background: var(--soil-2);
+  border: 1px solid var(--soil-line);
+  color: var(--ink-on-soil);
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  line-height: 1.3;
+  cursor: pointer;
+}
+
+.chip:hover {
+  border-color: var(--wheat);
+  background: #45301c;
+}
+
+.chip:focus-visible,
+.chat-form button:focus-visible,
+.chat-form input:focus-visible,
+.drawer-toggle:focus-visible {
+  outline: 2px solid var(--wheat);
+  outline-offset: 2px;
+}
+
+.chip-icon {
+  flex-shrink: 0;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+/* --------------------------------------------------------------------------
+   Chat pane
+   -------------------------------------------------------------------------- */
+
+.chat-pane {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  position: relative;
+}
+
+/* --------------------------------------------------------------------------
+   Name gate — first-visit intake, overlaid on the chat pane
+   -------------------------------------------------------------------------- */
+
+.name-gate {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(43, 29, 18, 0.6);
+}
+
+.name-gate.hidden {
+  display: none;
+}
+
+.name-gate-card {
+  background: var(--paper);
+  border-radius: var(--radius-md);
+  padding: 30px 32px;
+  max-width: 340px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+}
+
+.name-gate-card h2 {
+  font-family: var(--font-brand);
+  font-size: 1.25rem;
+  margin: 0 0 6px;
+  color: var(--ink);
+}
+
+.name-gate-card p {
+  margin: 0 0 16px;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+#name-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#name-input {
+  padding: 11px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid #cfc7b4;
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  outline: none;
+  background: var(--haze);
+  color: var(--ink);
+  text-align: center;
+}
+
+#name-input:focus {
+  border-color: var(--wheat-deep);
+  background: var(--paper);
+}
+
+#name-form button {
+  background: var(--wheat);
+  color: #2b1d0a;
+  border: none;
+  padding: 11px 0;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.98rem;
+}
+
+#name-form button:hover {
+  background: var(--wheat-deep);
+  color: #fff;
+}
+
+.chat-header {
+  padding: 20px 28px;
+  background: var(--paper);
+  border-bottom: 1px solid #e3e0d4;
+}
+
+.chat-header h2 {
+  font-family: var(--font-brand);
+  font-weight: 600;
+  font-size: 1.3rem;
+  margin: 0;
+  color: var(--ink);
+}
+
+.chat-window {
+  flex: 1;
+  overflow-y: auto;
+  padding: 22px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.message {
+  display: flex;
+  max-width: 100%;
+}
+
+.message.user {
+  justify-content: flex-end;
+}
+
+.bubble {
+  max-width: 60ch;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  line-height: 1.5;
+  font-size: 0.97rem;
+  white-space: pre-wrap;
+}
+
+.message.bot .bubble {
+  background: var(--paper);
+  border: 1px solid #e3e0d4;
+  border-left: 3px solid var(--field);
+  color: var(--ink);
+}
+
+/* Rendered markdown inside bot replies (see renderMarkdown in script.js) */
+.bubble.rich {
+  white-space: normal;
+}
+
+.bubble.rich p {
+  margin: 0 0 10px;
+}
+
+.bubble.rich p:last-child {
+  margin-bottom: 0;
+}
+
+.bubble.rich ul,
+.bubble.rich ol {
+  margin: 4px 0 12px;
+  padding-left: 1.3em;
+}
+
+.bubble.rich ul:last-child,
+.bubble.rich ol:last-child {
+  margin-bottom: 0;
+}
+
+.bubble.rich li {
+  margin-bottom: 5px;
+  line-height: 1.45;
+}
+
+.bubble.rich li:last-child {
+  margin-bottom: 0;
+}
+
+.bubble.rich strong {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.bubble.rich em {
+  font-style: italic;
+}
+
+.message.user .bubble {
+  background: var(--wheat);
+  color: #2b1d0a;
+  font-weight: 500;
+  border-bottom-right-radius: 3px;
+}
+
+.message.bot.error .bubble {
+  border-left-color: var(--clay);
+  background: #fbeee9;
+  color: #5c2415;
+}
+
+.chat-form {
+  display: flex;
+  gap: 10px;
+  padding: 16px 28px 20px;
+  background: var(--paper);
+  border-top: 1px solid #e3e0d4;
+}
+
+#chat-input {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid #cfc7b4;
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  outline: none;
+  background: var(--haze);
+  color: var(--ink);
+}
+
+#chat-input:focus {
+  border-color: var(--wheat-deep);
+  background: var(--paper);
+}
+
+.chat-form button {
+  background: var(--field);
+  color: #fff;
+  border: none;
+  padding: 0 24px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.98rem;
+}
+
+.chat-form button:hover {
+  background: #345a34;
+}
+
+.chat-form button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive: sidebar becomes a toggleable drawer under 780px
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 780px) {
+  .app {
+    flex-direction: column;
+    height: auto;
+    min-height: calc(100vh - 6px);
+  }
+
+  .drawer-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    background: var(--soil);
+    color: var(--ink-on-soil);
+    border: none;
+    border-bottom: 1px solid var(--soil-line);
+    padding: 14px 18px;
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    display: none;
+    max-height: 70vh;
+  }
+
+  .sidebar.open {
+    display: block;
+  }
+
+  .chat-pane {
+    height: 80vh;
+  }
+
+  .bubble {
+    max-width: 88%;
+  }
+
+  .chat-header,
+  .chat-window,
+  .chat-form {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
